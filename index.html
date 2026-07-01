@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="ms" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Koleksi E-Book Anak Lancar Baca</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Tailwind Config for custom styles -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#f0fdf4',
+              100: '#dcfce7',
+              500: '#22c55e',
+              600: '#16a34a',
+              700: '#15803d',
+              900: '#14532d',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    .gradient-bg {
+      background: radial-gradient(circle at 50% 0%, #1e1b4b 0%, #0f0b36 100%);
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col">
+
+  <!-- Hero Section -->
+
+<section class="gradient-bg text-white pt-10 pb-12 px-4 relative overflow-hidden">
+  <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(34,197,94,0.12),transparent_50%)]"></div>
+
+  <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 items-center relative z-10">
+
+    <!-- Teks Hero -->
+    <div class="text-center md:text-left">
+      <span class="inline-flex items-center gap-1.5 bg-brand-500/10 text-brand-400 px-4 py-1.5 rounded-full text-xs font-semibold mb-4 border border-brand-500/20">
+        <i data-lucide="sparkles" class="w-3.5 h-3.5 animate-pulse"></i>
+        Siri Bacaan Kanak-Kanak
+      </span>
+
+      <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight leading-tight">
+        Cepat Membaca 
+        Anak Lebih Bijak
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-emerald-300">
+          Lancar Membaca
+        </span>
+      </h1>
+
+      <p class="mt-4 text-base md:text-lg text-slate-300 max-w-xl mx-auto md:mx-0 font-light">
+        E-book bacaan berperingkat untuk membantu anak mengenal huruf, suku kata, perkataan, ayat pendek dan membaca dengan lebih yakin.
+      </p>
+
+      <div class="mt-5 flex items-center justify-center md:justify-start gap-2 text-yellow-400 text-sm">
+        ★★★★★
+        <span class="text-slate-300">Dipercayai ibu bapa & guru</span>
+      </div>
+
+      <div class="mt-6 flex flex-wrap justify-center md:justify-start gap-3">
+        <a href="#katalog" class="bg-brand-600 hover:bg-brand-700 text-white font-bold px-7 py-3.5 rounded-xl transition-all shadow-lg shadow-brand-600/20 flex items-center gap-2">
+          Lihat E-Book
+          <i data-lucide="arrow-down" class="w-5 h-5"></i>
+        </a>
+
+    
+      </div>
+    </div>
+
+   
+ <div class="absolute left-0 top-0 bottom-0 w-8 bg-black/25"></div>
+
+    <!-- Isi cover -->
+    <div class="flex justify-center">
+
+    <img
+        src="poster-5-langkah.png"
+        class="w-72 md:w-[420px] rounded-3xl shadow-[0_30px_80px_rgba(0,0,0,0.35)] hover:scale-105 transition duration-500">
+
+</div>
+    </div>
+  </div>
+</div>
+</section>
+
+
+
+  <!-- E-book Catalog Section -->
+  <section id="katalog" class="max-w-7xl mx-auto px-4 py-20">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Katalog</h2>
+      <p class="text-slate-500 mt-2">Pilih cerita murni dan bimbingan terbaik untuk anak-anak.</p>
+    </div>
+
+    <!-- Search & Filter Controls -->
+    <div class="bg-white border border-slate-100 rounded-2xl p-6 shadow-md mb-12 max-w-4xl mx-auto flex flex-col md:flex-row gap-4 items-center justify-between">
+      <!-- Search Input -->
+      <div class="relative w-full md:w-72">
+        <span class="absolute inset-y-0 flex items-center pl-3 text-slate-400">
+          <i data-lucide="search" class="w-5 h-5"></i>
+        </span>
+        <input 
+          type="text" 
+          id="searchBox" 
+          oninput="filterEbooks()" 
+          placeholder="Cari tajuk e-book..." 
+          class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500 text-sm"
+        />
+      </div>
+
+      <!-- Categories Tabs -->
+      <div class="flex flex-wrap gap-2 w-full md:w-auto justify-center">
+        <button onclick="setCategory('Semua')" id="tab-Semua" class="cat-tab px-4 py-2 rounded-xl text-xs font-bold transition-all bg-brand-600 text-white shadow-sm">
+          Semua
+        </button>
+        <button onclick="setCategory('Kanak-kanak')" id="tab-Kanak-kanak" class="cat-tab px-4 py-2 rounded-xl text-xs font-bold transition-all bg-slate-100 text-slate-600 hover:bg-slate-200">
+          Cerita Kanak-kanak
+        </button>
+        <button onclick="setCategory('Motivasi & Adab')" id="tab-Motivasi-Adab" class="cat-tab px-4 py-2 rounded-xl text-xs font-bold transition-all bg-slate-100 text-slate-600 hover:bg-slate-200">
+          Motivasi & Adab
+        </button>
+        <button onclick="setCategory('Keluarga')" id="tab-Keluarga" class="cat-tab px-4 py-2 rounded-xl text-xs font-bold transition-all bg-slate-100 text-slate-600 hover:bg-slate-200">
+          Keluarga & Hubungan
+        </button>
+      </div>
+    </div>
+
+    <!-- Ebooks Container -->
+    <div id="ebooksGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      <!-- Dynamic content injected by JavaScript -->
+    </div>
+
+    <!-- Empty State for Search/Filter -->
+    <div id="emptyState" class="hidden text-center py-16">
+      <i data-lucide="book-x" class="w-16 h-16 text-slate-300 mx-auto mb-4"></i>
+      <h3 class="text-lg font-bold text-slate-700">Tiada E-Book Ditemui</h3>
+      <p class="text-slate-400 text-sm mt-1">Sila cuba kata kunci carian yang lain.</p>
+    </div>
+  </section>
+
+ 
+  <!-- Features / Why Choose Us -->
+  <section id="kenapa-kami" class="bg-slate-900 text-white py-20 px-4">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold">Kelebihan Kami</h2>
+        <p class="text-slate-400 mt-2">Dapatkan jaminan kualiti bahan bacaan.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700/50">
+          <div class="bg-brand-500/10 text-brand-500 w-12 h-12 rounded-xl flex items-center justify-center mb-6">
+            <i data-lucide="zap" class="w-6 h-6"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-3">Penghantaran Segera</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Sebaik sahaja bayaran disahkan menerusi ToyyibPay, sistem akan menghantar pautan muat turun e-book terus ke emel anda secara automatik.</p>
+        </div>
+        <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700/50">
+          <div class="bg-brand-500/10 text-brand-500 w-12 h-12 rounded-xl flex items-center justify-center mb-6">
+            <i data-lucide="smartphone" class="w-6 h-6"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-3">Mesra Peranti</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">E-book kami disediakan dalam format PDF berkualiti tinggi yang dioptimumkan untuk bacaan pada telefon pintar, tablet, mahupun komputer riba.</p>
+        </div>
+        <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700/50">
+          <div class="bg-brand-500/10 text-brand-500 w-12 h-12 rounded-xl flex items-center justify-center mb-6">
+            <i data-lucide="shield-check" class="w-6 h-6"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-3">Bayaran Selamat</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Gerbang pembayaran FPX dalam ToyyibPay menjamin keselamatan transaksi perbankan anda dengan enkripsi standard industri.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Checkout Drawer Modal -->
+  <div id="checkoutModal" class="fixed inset-0 z-50 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    <div class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity" onclick="closeCheckout()"></div>
+
+    <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+      <div class="relative transform overflow-hidden rounded-3xl bg-white text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+        
+        <!-- Header -->
+        <div class="bg-slate-950 px-6 py-6 text-white relative">
+          <button onclick="closeCheckout()" class="absolute top-4 right-4 text-slate-400 hover:text-white transition-colors">
+            <i data-lucide="x" class="w-6 h-6"></i>
+          </button>
+          <div class="flex items-center gap-3">
+            <div class="bg-brand-600 p-2.5 rounded-xl text-white">
+              <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <h3 class="text-lg font-bold" id="checkoutTitle">Borang Pembelian</h3>
+              <p class="text-xs text-slate-400">Lengkapkan maklumat anda untuk pendaftaran bil.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Form Body -->
+        <form id="purchaseForm" onsubmit="handleCheckout(event)" class="p-6 space-y-4">
+          <div id="modalStatus" class="hidden p-3.5 rounded-xl text-sm font-medium"></div>
+
+          <!-- Product Details Summary -->
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100 flex items-center justify-between">
+            <div>
+              <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Produk Terpilih</span>
+              <p class="font-bold text-slate-800 text-base" id="selectedProductLabel">N/A</p>
+            </div>
+            <div class="text-right">
+              <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Jumlah</span>
+              <p class="font-black text-brand-600 text-lg" id="selectedPriceLabel">RM 0.00</p>
+            </div>
+          </div>
+
+          <!-- Fields -->
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Nama Penuh</label>
+            <div class="relative">
+              <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">
+                <i data-lucide="user" class="w-4 h-4"></i>
+              </span>
+              <input 
+                type="text" 
+                id="buyerName" 
+                required 
+                placeholder="cth. Muhammad Ali bin Abu" 
+                class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500 bg-slate-50 focus:bg-white transition-all text-sm"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Alamat Emel</label>
+            <div class="relative">
+              <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">
+                <i data-lucide="mail" class="w-4 h-4"></i>
+              </span>
+              <input 
+                type="email" 
+                id="buyerEmail" 
+                required 
+                placeholder="cth. ali@gmail.com" 
+                class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500 bg-slate-50 focus:bg-white transition-all text-sm"
+              />
+            </div>
+            <p class="text-[10px] text-slate-400 mt-1">E-book akan dihantar ke emel ini selepas pengesahan bayaran.</p>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">No. Telefon</label>
+            <div class="relative">
+              <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">
+                <i data-lucide="phone" class="w-4 h-4"></i>
+              </span>
+              <input 
+                type="tel" 
+                id="buyerPhone" 
+                required 
+                placeholder="cth. 0123456789" 
+                class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500 bg-slate-50 focus:bg-white transition-all text-sm"
+              />
+            </div>
+          </div>
+
+          <!-- Alert for Configuration URL Alert -->
+          <div id="urlWarning" class="hidden p-3 bg-red-50 text-red-700 border border-red-200 rounded-xl text-xs flex items-start gap-2">
+            <i data-lucide="alert-triangle" class="w-4 h-4 shrink-0 mt-0.5"></i>
+            <div>
+              <strong>Ralat Konfigurasi:</strong> Pembelian tidak dapat dijalankan. Sila hubungi pentadbir sistem untuk menyambung pautan web app Google Apps Script.
+            </div>
+          </div>
+
+          <!-- Action Button -->
+          <div class="pt-2">
+            <button 
+              type="submit" 
+              id="submitBtn"
+              class="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3.5 px-4 rounded-xl shadow-lg shadow-brand-600/20 transition-all flex items-center justify-center gap-2"
+            >
+              <span id="btnText">Bayar Dengan ToyyibPay</span>
+              <i data-lucide="arrow-right" class="w-4 h-4" id="btnIcon"></i>
+              <div id="loadingSpinner" class="hidden animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent"></div>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="mt-auto bg-slate-900 text-slate-400 py-8 px-4 border-t border-slate-800">
+    <div class="max-w-6xl mx-auto text-center">
+      <p class="text-xs">&copy; 2026 E-Book Dr Zahir. Hak cipta terpelihara.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts for client-side behaviors -->
+  <script>
+    // =======================================================
+    // SILA TAMPAL WEB APP URL GOOGLE APPS SCRIPT ANDA DI SINI
+    // =======================================================
+    const WEB_APP_URL = "PASTE_WEB_APP_URL_DI_SINI";
+
+    // 12 Ebooks Dataset dengan harga RM 5.90 seragam & cover imej daripada Google Drive
+    const EBOOKS_DATA = [
+      {
+        id: "semut_rajin",
+        title: "SEMUT YANG RAJIN",
+        desc: "Kisah tauladan mengajar anak-anak tentang nilai kerajinan, kerjasama dan kepentingan membuat persediaan awal dalam kehidupan.",
+        price: 5.90,
+        category: "Kanak-kanak",
+        colorClass: "from-emerald-500 to-green-600",
+        badge: "Nilai Murni",
+        icon: "bug",
+        coverImg: "https://lh3.googleusercontent.com/d/1JCMAP5KJE7A0Gai59fvUUVtEu-DsSZJr"
+      },
+      {
+        id: "buat_baik",
+        title: "BUAT BAIK SETIAP HARI",
+        desc: "Satu panduan praktikal dan interaktif harian untuk memupuk kebiasaan berbuat kebaikan kecil dalam kalangan anak-anak.",
+        price: 5.90,
+        category: "Motivasi & Adab",
+        colorClass: "from-blue-500 to-indigo-600",
+        badge: "Amalan Mulia",
+        icon: "heart-handshake",
+        coverImg: "https://lh3.googleusercontent.com/d/1No2alD3D8kxfzFSw9JoSVAd_PC7SuMWx"
+      },
+      {
+        id: "cinta_keluarga",
+        title: "CINTA DAN KASIH SAYANG KELUARGA",
+        desc: "Kompilasi cerita menyentuh hati membina empati, menghargai jasa ibu bapa serta mengukuhkan silaturahim sesama ahli keluarga.",
+        price: 5.90,
+        category: "Keluarga",
+        colorClass: "from-rose-500 to-red-600",
+        badge: "Kekeluargaan",
+        icon: "heart",
+        coverImg: "https://lh3.googleusercontent.com/d/1CMhEIjrLHo7jfR22kDIz3u9ZwzNBqufw"
+      },
+      {
+        id: "adab_kawan",
+        title: "BERADAB DENGAN KAWAN",
+        desc: "Panduan membina hubungan sosial yang sihat, menghormati rakan sebaya, berkongsi dan menyelesaikan konflik dengan harmoni.",
+        price: 5.90,
+        category: "Motivasi & Adab",
+        colorClass: "from-cyan-500 to-teal-600",
+        badge: "Panduan Adab",
+        icon: "users",
+        coverImg: "https://lh3.googleusercontent.com/d/1zGvlTjstrJreX5Q9zY_eymIJdT0tfIpL"
+      },
+      {
+        id: "dua_sahabat",
+        title: "DUA SAHABAT",
+        desc: "Kembara penuh inspirasi dua sahabat karib mengatasi cabaran bersama demi membuktikan erti kesetiaan dan persahabatan sejati.",
+        price: 5.90,
+        category: "Kanak-kanak",
+        colorClass: "from-amber-500 to-orange-600",
+        badge: "Kesetiaan",
+        icon: "sparkles",
+        coverImg: "https://lh3.googleusercontent.com/d/1G2G5Ogj1NyCME8SbU0-HbhqdH6KEUxe5"
+      },
+      {
+        id: "buku_mengubah_hidup",
+        title: "BUKU YANG MENGUBAH HIDUP",
+        desc: "E-book inspirasi memuatkan prinsip-prinsip kejayaan, membina tabiat produktif dan merubah pemikiran negatif kepada positif.",
+        price: 5.90,
+        category: "Motivasi & Adab",
+        colorClass: "from-purple-600 to-indigo-800",
+        badge: "Best Seller",
+        icon: "book-open",
+        coverImg: "https://lh3.googleusercontent.com/d/1Py81WSrxZthHLRsL2dsXLCyjEeOPZsl_"
+      },
+      {
+        id: "nurul_pintar",
+        title: "NURUL YANG PINTAR",
+        desc: "Menceritakan strategi belajar kreatif Nurul dalam menyelesaikan masalah harian menggunakan minda yang cerdas dan logik.",
+        price: 5.90,
+        category: "Kanak-kanak",
+        colorClass: "from-fuchsia-500 to-pink-600",
+        badge: "Kreativiti",
+        icon: "brain",
+        coverImg: "https://lh3.googleusercontent.com/d/1YlFzoYIEcgkOp6BNbKUiT-JsPTILWzWQ"
+      },
+      {
+        id: "irfan_rajin",
+        title: "IRFAN YANG RAJIN",
+        desc: "Perjalanan seharian Irfan yang rajin membantu orang sekelilingnya, membuktikan usaha gigih sentiasa membawa hasil yang baik.",
+        price: 5.90,
+        category: "Kanak-kanak",
+        colorClass: "from-sky-500 to-blue-600",
+        badge: "Motivasi Diri",
+        icon: "award",
+        coverImg: "https://lh3.googleusercontent.com/d/14_ynj7V4o2XD9N08DhpUqNeiHxFiVkcl"
+      },
+      {
+        id: "anak_anak_rajin",
+        title: "ANAK-ANAK YANG RAJIN",
+        desc: "Kisah sekumpulan kanak-kanak bekerjasama membangunkan projek komuniti demi menceriakan kawasan kejiranan mereka.",
+        price: 5.90,
+        category: "Keluarga",
+        colorClass: "from-violet-500 to-purple-700",
+        badge: "Gotong-Royong",
+        icon: "baby",
+        coverImg: "https://lh3.googleusercontent.com/d/1fcJvMKyH3bBPU0pgh36WFgqandEXUDfU"
+      },
+      {
+        id: "pelajaran_hati",
+        title: "PELAJARAN DARI HATI KECIL",
+        desc: "Bimbingan emosi untuk memahami perasaan sendiri, meluahkan emosi dengan baik dan membina kecerdasan emosi (EQ) yang mantap.",
+        price: 5.90,
+        category: "Motivasi & Adab",
+        colorClass: "from-emerald-600 to-teal-800",
+        badge: "Psikologi Anak",
+        icon: "smile",
+        coverImg: "https://lh3.googleusercontent.com/d/1iEjfjDRfcFSqC139r9sKB46K-Ywbf3NC"
+      },
+      {
+        id: "kancil_arnab",
+        title: "PERSAHABATAN SI KANCIL DAN SI ARNAB",
+        desc: "Kisah dongeng jenaka klasik moden yang penuh dengan nasihat pintar tentang kebijaksanaan mengatasi kekuatan fizikal kasar.",
+        price: 5.90,
+        category: "Kanak-kanak",
+        colorClass: "from-orange-500 to-yellow-600",
+        badge: "Dongeng Teladan",
+        icon: "trees",
+        coverImg: "https://lh3.googleusercontent.com/d/1MdOIhKRugy6Men8StJMyqtrRQpRvRN4z"
+      },
+      {
+        id: "kasih_ibu_kiki",
+        title: "KASIH IBU KIKI",
+        desc: "Kisah penuh kelembutan dan nilai kasih sayang tidak bersyarat seorang ibu kepada anaknya, Kiki, dalam menempuhi kehidupan seharian.",
+        price: 5.90,
+        category: "Keluarga",
+        colorClass: "from-pink-500 to-rose-600",
+        badge: "Kasih Sayang",
+        icon: "heart",
+        coverImg: "https://lh3.googleusercontent.com/d/1bqLXyNh-nJ4xu2XRYCq_NMoid8JLugx9"
+      }
+    ];
+
+    let currentCategory = "Semua";
+    let selectedProduct = "";
+    let selectedPrice = 0;
+
+    // Load and render catalog
+    window.onload = function() {
+      renderEbooks();
+      lucide.createIcons();
+    };
+
+    // Helper function to render a realistic styled 3D-angled CSS Book Cover if cover URL is empty or invalid
+    function renderCustomCover(book) {
+      return `
+        <div class="h-64 bg-gradient-to-br ${book.colorClass} relative flex flex-col items-center justify-between p-5 overflow-hidden select-none w-full">
+          <!-- Glossy Highlight Overlay -->
+          <div class="absolute inset-0 bg-gradient-to-tr from-black/20 via-white/5 to-white/20 pointer-events-none"></div>
+          
+          <!-- Realistic Left Book Spine Shadow / Crease -->
+          <div class="absolute left-0 top-0 bottom-0 w-3.5 bg-gradient-to-r from-black/30 via-black/10 to-transparent pointer-events-none"></div>
+          <div class="absolute left-3.5 top-0 bottom-0 w-[1px] bg-white/20 pointer-events-none"></div>
+          
+          <!-- Top Tag / Badge -->
+          <div class="absolute top-4 right-4 bg-white/20 backdrop-blur-md text-white border border-white/30 text-[9px] font-extrabold px-2.5 py-0.5 rounded-full uppercase tracking-wider">
+            ${book.badge}
+          </div>
+
+          <!-- Series Indicator -->
+          <div class="text-[8px] text-white/70 font-bold uppercase tracking-widest text-center mt-3 border-b border-white/20 pb-1 w-full max-w-[120px] mx-auto">
+            Siri Lancar Baca
+          </div>
+
+          <!-- Dynamic Center Icon -->
+          <div class="my-auto transform group-hover:scale-110 transition-transform duration-300">
+            <div class="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center border border-white/25 shadow-2xl backdrop-blur-sm">
+              <i data-lucide="${book.icon}" class="w-8 h-8 text-white"></i>
+            </div>
+          </div>
+
+          <!-- Cover Title Text -->
+          <div class="text-center w-full px-2 mb-2">
+            <h4 class="text-xs font-black text-white leading-snug uppercase tracking-tight line-clamp-2 drop-shadow-md">
+              ${book.title}
+            </h4>
+            <span class="block text-[7px] text-white/60 tracking-wider font-semibold uppercase mt-1">E-Book Pendidikan</span>
+          </div>
+        </div>
+      `;
+    }
+
+    // Handles custom fallback when image error occurs, securely without injecting broken string to HTML
+    function handleImageError(imgElement, bookId) {
+      imgElement.onerror = null; // Prevent infinite loop
+      const book = EBOOKS_DATA.find(b => b.id === bookId);
+      if (book) {
+        const container = imgElement.parentNode;
+        container.innerHTML = renderCustomCover(book);
+        lucide.createIcons();
+      }
+    }
+
+    // Render E-books dynamically based on search & category filter
+    function renderEbooks() {
+      const grid = document.getElementById('ebooksGrid');
+      const emptyState = document.getElementById('emptyState');
+      const searchVal = document.getElementById('searchBox').value.toLowerCase().trim();
+      
+      grid.innerHTML = "";
+
+      const filtered = EBOOKS_DATA.filter(book => {
+        const matchesCategory = (currentCategory === "Semua" || book.category === currentCategory || (currentCategory === "Motivasi & Adab" && book.category === "Motivasi & Adab"));
+        const matchesSearch = book.title.toLowerCase().includes(searchVal) || book.desc.toLowerCase().includes(searchVal);
+        return matchesCategory && matchesSearch;
+      });
+
+      if (filtered.length === 0) {
+        emptyState.classList.remove('hidden');
+        grid.classList.add('hidden');
+      } else {
+        emptyState.classList.add('hidden');
+        grid.classList.remove('hidden');
+
+        filtered.forEach(book => {
+          // Check if the user defined an image URL, otherwise render fallback cover design
+          let coverOutput = "";
+          const hasRealImage = book.coverImg && book.coverImg.trim() !== "" && !book.coverImg.startsWith("TAMPAL_URL_IMEJ_");
+
+          if (hasRealImage) {
+            coverOutput = `
+              <div class="h-64 bg-slate-100 border-b border-slate-100 flex items-center justify-center p-3 relative overflow-hidden">
+                <!-- Book Spine Layer with soft shadow for realism -->
+                <div class="absolute left-0 top-0 bottom-0 w-3 bg-gradient-to-r from-black/25 to-transparent z-10 pointer-events-none"></div>
+                <!-- Fully contained image rendering to show 100% of the book cover with standard aspect ratio -->
+                <img 
+                  src="${book.coverImg}" 
+                  alt="${book.title}" 
+                  class="max-h-full max-w-full object-contain shadow-md rounded-md transform group-hover:scale-105 transition-transform duration-500 relative z-0"
+                  onerror="handleImageError(this, '${book.id}')"
+                />
+              </div>
+            `;
+          } else {
+            coverOutput = renderCustomCover(book);
+          }
+
+          const cardHtml = `
+            <div class="bg-white border border-slate-100 rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden group">
+              <!-- E-Book Premium Cover Page Container -->
+              ${coverOutput}
+              
+              <!-- Content and details -->
+              <div class="p-6 flex-1 flex flex-col justify-between bg-white relative z-10">
+                <div>
+                  <h3 class="text-base font-bold text-slate-900 min-h-[48px] flex items-center leading-snug">${book.title}</h3>
+                  <p class="text-slate-500 text-xs mt-2 line-clamp-3 min-h-[54px]">${book.desc}</p>
+                </div>
+                <div class="mt-6 pt-4 border-t border-slate-100">
+                  <div class="flex items-center justify-between mb-4">
+                    <span class="text-slate-400 text-xs font-medium">Harga Promosi</span>
+                    <span class="text-xl font-extrabold text-slate-900">RM ${book.price.toFixed(2)}</span>
+                  </div>
+                  <button onclick="openCheckout('${book.title.replace(/'/g, "\\'")}', ${book.price})" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-2.5 rounded-xl text-xs transition-colors flex items-center justify-center gap-1.5 shadow-sm">
+                    Dapatkan E-Book <i data-lucide="shopping-cart" class="w-3.5 h-3.5"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          `;
+          grid.innerHTML += cardHtml;
+        });
+      }
+      
+      // Update Lucide Icons dynamically
+      lucide.createIcons();
+    }
+
+    // Set Active Tab Category
+    function setCategory(cat) {
+      currentCategory = cat;
+      const tabs = document.querySelectorAll('.cat-tab');
+      tabs.forEach(tab => {
+        tab.className = "cat-tab px-4 py-2 rounded-xl text-xs font-bold transition-all bg-slate-100 text-slate-600 hover:bg-slate-200";
+      });
+
+      // Map tab names correctly to IDs
+      const safeId = cat.replace('&', '').replace(' ', '-');
+      const activeTab = document.getElementById(`tab-${safeId}`);
+      if (activeTab) {
+        activeTab.className = "cat-tab px-4 py-2 rounded-xl text-xs font-bold transition-all bg-brand-600 text-white shadow-sm";
+      }
+
+      renderEbooks();
+    }
+
+    // Quick filter trigger on search text change
+    function filterEbooks() {
+      renderEbooks();
+    }
+
+    // Checkout drawer trigger
+    function openCheckout(productName, price) {
+      selectedProduct = productName;
+      selectedPrice = price;
+
+      document.getElementById('selectedProductLabel').innerText = productName;
+      document.getElementById('selectedPriceLabel').innerText = `RM ${price.toFixed(2)}`;
+      
+      const warning = document.getElementById('urlWarning');
+      if (!WEB_APP_URL || WEB_APP_URL === "PASTE_WEB_APP_URL_DI_SINI") {
+        warning.classList.remove('hidden');
+      } else {
+        warning.classList.add('hidden');
+      }
+
+      document.getElementById('checkoutModal').classList.remove('hidden');
+    }
+
+    function closeCheckout() {
+      document.getElementById('checkoutModal').classList.add('hidden');
+      resetModalStatus();
+    }
+
+    function resetModalStatus() {
+      const modalStatus = document.getElementById('modalStatus');
+      modalStatus.classList.add('hidden');
+      modalStatus.className = "p-3.5 rounded-xl text-sm font-medium hidden";
+      
+      const submitBtn = document.getElementById('submitBtn');
+      submitBtn.disabled = false;
+      document.getElementById('btnText').innerText = "Bayar Dengan ToyyibPay";
+      document.getElementById('loadingSpinner').classList.add('hidden');
+      document.getElementById('btnIcon').classList.remove('hidden');
+    }
+
+    // Form and POST request orchestration
+    async function handleCheckout(event) {
+      event.preventDefault();
+      
+      if (!WEB_APP_URL || WEB_APP_URL === "PASTE_WEB_APP_URL_DI_SINI") {
+        showModalStatus('Ralat: Sila hubungi pemilik sistem untuk memasukkan pautan Google Apps Script WEB_APP_URL yang sah.', 'error');
+        document.getElementById('urlWarning').classList.remove('hidden');
+        return;
+      }
+
+      const nama = document.getElementById('buyerName').value.trim();
+      const emel = document.getElementById('buyerEmail').value.trim();
+      const telefon = document.getElementById('buyerPhone').value.trim();
+
+      const submitBtn = document.getElementById('submitBtn');
+      const btnText = document.getElementById('btnText');
+      const loadingSpinner = document.getElementById('loadingSpinner');
+      const btnIcon = document.getElementById('btnIcon');
+
+      submitBtn.disabled = true;
+      btnText.innerText = "Menghantar pesanan...";
+      loadingSpinner.classList.remove('hidden');
+      if (btnIcon) btnIcon.classList.add('hidden');
+
+      const payload = {
+        action: "createBill",
+        nama: nama,
+        emel: emel,
+        telefon: telefon,
+        produk: selectedProduct,
+        harga: selectedPrice.toString()
+      };
+
+      try {
+        const response = await fetch(WEB_APP_URL, {
+          method: 'POST',
+          mode: 'cors',
+          headers: {
+            'Content-Type': 'text/plain;charset=utf-8',
+          },
+          body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) {
+          throw new Error(`Ralat Webhook: Status HTTP ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        if (data.success && data.paymentUrl) {
+          showModalStatus('Bil berjaya dicipta! Mengalihkan anda ke ToyyibPay...', 'success');
+          setTimeout(() => {
+            window.location.href = data.paymentUrl;
+          }, 1500);
+        } else {
+          throw new Error(data.message || 'ToyyibPay gagal membina pautan pembayaran.');
+        }
+
+      } catch (error) {
+        console.error('Checkout Error:', error);
+        showModalStatus(`Gagal memproses pesanan: ${error.message}. Sila pastikan Web App URL anda di-deploy dengan betul.`, 'error');
+        
+        submitBtn.disabled = false;
+        btnText.innerText = "Cuba Semula";
+        loadingSpinner.classList.add('hidden');
+        if (btnIcon) btnIcon.classList.remove('hidden');
+      }
+    }
+
+    function showModalStatus(message, type) {
+      const banner = document.getElementById('modalStatus');
+      banner.classList.remove('hidden');
+      banner.innerText = message;
+
+      if (type === 'success') {
+        banner.className = "p-3.5 rounded-xl text-sm font-medium bg-green-50 text-green-800 border border-green-200";
+      } else {
+        banner.className = "p-3.5 rounded-xl text-sm font-medium bg-red-50 text-red-800 border border-red-200";
+      }
+    }
+  </script>
+</body>
+</html>
